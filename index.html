@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="Démonstration chaine de services Choucas TextToGeoJson">
+		<meta name="author" content="Eric Gouardères">
+    	<title>Démonstration chaine de services Choucas TextToGeoJson</title>
+	    <!-- Feuille de style Leaflet -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>	
+		 <!-- A mettre obligatoirement après la feuille de style Leaflet -->
+		 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+		 <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+		 <!-- A mettre obligatoirement après la feuille de style Leaflet, sinon certains styles ignorés -->
+		 <link rel="stylesheet" type="text/css" href="./styles/testStyle.css">
+		 <link rel="stylesheet" type="text/css" href="./styles/style.css">
+	
+	</head>
+	<body>
+		<div id="top">
+			<div id ="title"><h3>Démonstration chaine de services Choucas TextToGeoJson</h3></div>
+			<div id="menu">
+				<!--<div><a href="https://nuage.univ-pau.fr/s/cjzpSzLkP48MiA6" target="_blank"><h4>Documents</h4></a></div>-->
+				<div><a href="./docs/documentation.html" target="_blank"><h4>Documentation</h4></a></div>
+				<div><a href="./docs/apropos.html" target="_blank"><h4>A propos</h4></a></div>
+			</div>	
+		</div>
+			<!-- Un élément div avec un id pour l'emplacement de la carte -->
+		<div id="body">
+			<table id="content">
+				<tr>
+					<td>
+						<div id="chaineServices">
+							<h4>La chaine de services permet d'extraire d'un texte des entités et des relations spatiales. Elle fournit une géolocalisation des entités nommées.</h4>
+							<img src="./images/chaine_TextToGeo.png" alt="Schema chaîne TextToGeoJson">
+						</div>	
+						<div id="texte">
+							<h4>Entrer ou charger ci-dessous le texte à traiter</h4>
+							<label for="inputText">Texte :<br/></label>
+							<textarea id="inputText" name="inputText" rows="15" cols="75"></textarea>
+							<br/>
+							<div>
+								<form id="textFile">Charger un fichier texte <input type="file" onchange="loadFile(this.files[0], 'txt')"></form>
+							</div>		
+							<table>
+								<tr>
+									<td>
+										<button type="button" id="sendText" onclick="sendTextF(false)">Envoi</button>
+									</td>
+									<td>
+										<button type="button" id="testMe" onclick="sendTextF(true)">Test</button>
+									</td>
+									<td>
+										<button type="button" id="clearAll" onclick="clearAll()">Init.</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+					<td>
+						<h4>Résultat</h4>
+						<table>
+							<tr>
+								<td>
+									<input type="checkbox" id="showMap" name="showMap" onclick="showRes('Map')">
+									<label for="showMap">Carte</label>
+								</td>
+								<td>
+									<input type="checkbox" id="showJson" name="showJson" onclick="showRes('Json')">
+									<label for="showJson">Toponymes (GeoJson)</label>
+								</td>
+								<td>
+									<input type="checkbox" id="showTxt" name="showTxt" onclick="showRes('Txt')">
+									<label for="showTxt">Texte annoté</label>
+								</td>
+								<td>
+									<input type="checkbox" id="showXml" name="showXml" onclick="showRes('Xml')">
+									<label for="showXml">Texte annoté (XML)</label>
+								</td>
+							</tr>
+						</table>
+						<div id="result">
+							<div id="resJson">
+							<!--	<textarea id="outputText" name="outputText">hghkdsfhghdfkhgk</textarea>-->
+							<code id="outputJson"></code>
+							<hr/>
+							<a id="linkJson" href="about:blank" target="_blank">Voir le fichier geojson</a>
+							</div>
+							<div id="resTxt">
+							<code id="outputTxt"></code>
+							</div>
+							<div id="resXml">
+							<code id="outputXml"></code>
+							<iframe id="ifOutXml" src="about:blank"></iframe>
+							</div>
+							<div id="map">
+							</div>
+						</div>
+
+						<!-- ajout d'une couche geojson depuis un fichier sélectionné sur machine locale -->
+						<form id="geoFile">
+							Charger un fichier GeoJSON <input type="file" onchange="loadFile(this.files[0], 'geoJson')">
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="bottom">
+			<div>
+				<h4> Contact </h4>
+				<p><a href="tel:0559407639">05.59.40.76.39</a><br/>
+					<a href="mailto:eric.gouarderes@univ-pau.fr" target="_blank" class="menu">eric.gouarderes@univ-pau.fr</a>
+				</p>
+			</div>
+			<div>
+				<h4> Autres Liens </h4>
+				<table>
+							<tr>
+								<td>
+									<img src="./images/logo-choucas2.png" alt="" title="Linkedin" style="width:27px;height:24px"> 
+								</td>
+								<td>
+									<a href="http://erig.univ-pau.fr/" target="_blank">http://erig.univ-pau.fr/</a>
+								</td>
+								<td>
+									<img src="./images/logo-choucas2.png" alt="" title="Linkedin" style="width:27px;height:24px"> 
+								</td>
+								<td>
+									<a href="http://choucas.ign.fr/" target="_blank">http://choucas.ign.fr/</a>
+								</td>
+								<td>
+									<img src="./images/logo-choucas2.png" alt="" title="Linkedin" style="width:27px;height:24px"> 
+								</td>
+								<td>
+									<a href="http://choucas.univ-pau.fr/docs" target="_blank">http://choucas.univ-pau.fr/docs</a>
+								</td>
+							</tr>	
+							<tr>
+								<td>
+									<img src="./images/GitHub_Logo.png" alt="" title="GitHub" style="width:24px;height:24px"> 
+								</td>
+								<td>
+									<a href="https://git.univ-pau.fr/liuppa/choucas" target="_blank">github(old)</a>
+								</td>
+							</tr>							
+
+				</table>
+			</div>
+			<div>
+				<h4> Dernière mise à jour </h4>
+				<p>Avril 2022</p>
+			</div>
+		</div>	
+		<script type="text/javascript" src="./js/main.js"></script>
+	</body>
+</html>
