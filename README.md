@@ -26,13 +26,13 @@ On se trouve dans une combe qui monte au col de Bellefont. Au-dessus de Perqueli
 
 ### Results
 
-![](C:\Users\gouarder\Nuage\MyGit\choucas-demo-services\docs\presentation\demo02.png)
+![](.\docs\presentation\demo02.png)
 
-![](C:\Users\gouarder\Nuage\MyGit\choucas-demo-services\docs\presentation\demo03.png)
+![](.\docs\presentation\demo03.png)
 
-![](C:\Users\gouarder\Nuage\MyGit\choucas-demo-services\docs\presentation\demo04.png)
+![](.\docs\presentation\demo04.png)
 
-![](C:\Users\gouarder\Nuage\MyGit\choucas-demo-services\docs\presentation\demo05.png)
+![](.\docs\presentation\demo05.png)
 
 ![](C:\Users\gouarder\Nuage\MyGit\choucas-demo-services\docs\presentation\demo06.png)
 
